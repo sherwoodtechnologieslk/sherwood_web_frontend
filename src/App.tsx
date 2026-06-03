@@ -52,7 +52,41 @@ import aiProductsVideo from "../images/icon/AI2.mp4";
 import serviceSoftwareArt from "../images/icon/software.png";
 import serviceMobileArt from "../images/icon/mobile.png";
 import serviceWebArt from "../images/icon/web.png";
+import directorOne from "../images/1st director.png";
 import { showClientsSection } from "./featureFlags";
+
+type BoardMember = {
+  name: string;
+  role: string;
+  /** Optional secondary line, e.g. the company a member leads. */
+  company?: string;
+  /** Leave empty to render a "Photo coming soon" placeholder until the image is supplied. */
+  image: string;
+};
+
+const BOARD_MEMBERS: BoardMember[] = [
+  {
+    name: "Dr. Sajeeva Narangoda",
+    role: "Group CEO / Executive Director",
+    image: directorOne,
+  },
+  {
+    name: "Mr. Somadasa Palihawadena",
+    role: "Director / Chief Executive Officer",
+    company: "Sherwood Capital (Private) Limited",
+    image: "",
+  },
+  {
+    name: "To be announced",
+    role: "Director",
+    image: "",
+  },
+  {
+    name: "To be announced",
+    role: "Director",
+    image: "",
+  },
+];
 
 type DesktopProductSlide = { src: string; label: string; alt: string };
 
@@ -354,7 +388,7 @@ export const App: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [view, setView] = useState<
-    "home" | "primary" | "secondary" | "contact" | "product-detail"
+    "home" | "primary" | "secondary" | "contact" | "product-detail" | "team"
   >("home");
   const [productSlug, setProductSlug] = useState<ProductSlug | null>(null);
   const [isConsultationDialogOpen, setIsConsultationDialogOpen] =
@@ -429,6 +463,7 @@ export const App: React.FC = () => {
       "contact",
       "primary",
       "secondary",
+      "team",
     ];
     if (scrollToTopViews.includes(view)) {
       window.scrollTo(0, 0);
@@ -2307,7 +2342,144 @@ export const App: React.FC = () => {
     );
   };
 
+  const renderTeamPage = () => (
+    <section className="scroll-mt-32 relative overflow-hidden border-b border-border/40 bg-white text-slate-900 min-h-screen pt-[calc(1.2rem+3.5rem+env(safe-area-inset-top,0px))]">
+      <div className="absolute inset-0 z-0" aria-hidden="true">
+        <HomeHeroThreeBackground appearance="light" />
+      </div>
+      <div className="relative z-[5] mx-auto flex max-w-6xl flex-col gap-10 px-6 py-24 md:py-28">
+        <div className="space-y-4">
+          <Button
+            variant="default"
+            size="sm"
+            className={backNavGreenButtonClassName}
+            onClick={() => setView("home")}
+          >
+            ← Back to main page
+          </Button>
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">
+            Our Team
+          </p>
+          <h1 className="text-3xl font-semibold tracking-tight md:text-4xl">
+            Meet Our Managing Board
+          </h1>
+          <p className="max-w-3xl text-base text-slate-700 md:text-lg">
+            Our leadership brings together decades of experience across
+            technology, finance, and enterprise transformation — guiding
+            Sherwood Technologies with vision, integrity, and a relentless focus
+            on delivering meaningful impact.
+          </p>
+        </div>
+
+        <div className="space-y-8">
+          <AnimatedOnScroll staggerIndex={0}>
+            <h2 className="text-center text-2xl font-bold uppercase tracking-[0.2em] text-blue-800 md:text-3xl">
+              Directors
+            </h2>
+          </AnimatedOnScroll>
+
+          <div className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
+            {BOARD_MEMBERS.map((member, index) => (
+              <AnimatedOnScroll key={`${member.name}-${index}`} staggerIndex={index}>
+                <div className="card-interactive group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-md">
+                  <div className="aspect-square w-full overflow-hidden bg-slate-100">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                    ) : (
+                      <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="h-12 w-12"
+                          aria-hidden
+                        >
+                          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                          <circle cx="12" cy="7" r="4" />
+                        </svg>
+                        <span className="text-xs font-medium uppercase tracking-[0.18em]">
+                          Photo coming soon
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex flex-1 flex-col items-center gap-1.5 px-3 py-4 text-center md:px-4 md:py-5">
+                    <h3 className="text-sm font-semibold text-slate-900 md:text-base">
+                      {member.name}
+                    </h3>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-slate-500 md:text-xs">
+                      {member.role}
+                    </p>
+                    {member.company && (
+                      <p className="text-[0.65rem] font-medium text-slate-400 md:text-xs">
+                        {member.company}
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </AnimatedOnScroll>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-8 pt-4">
+          <AnimatedOnScroll staggerIndex={0}>
+            <h2 className="text-center text-2xl font-bold uppercase tracking-[0.2em] text-blue-800 md:text-3xl">
+              Our Team
+            </h2>
+          </AnimatedOnScroll>
+
+          <AnimatedOnScroll staggerIndex={1}>
+            <div className="card-interactive overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-md">
+              <div className="flex aspect-[16/7] w-full flex-col items-center justify-center gap-3 bg-gradient-to-br from-slate-100 to-slate-200 text-slate-400">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-14 w-14"
+                  aria-hidden
+                >
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                  <circle cx="9" cy="7" r="4" />
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+                <span className="text-xs font-medium uppercase tracking-[0.2em]">
+                  Team group photo coming soon
+                </span>
+              </div>
+              <div className="px-5 py-5 text-center">
+                <p className="text-sm text-slate-600">
+                  The people behind Sherwood Technologies — united by a shared
+                  commitment to innovation and impact.
+                </p>
+              </div>
+            </div>
+          </AnimatedOnScroll>
+        </div>
+      </div>
+    </section>
+  );
+
   const handleNavigateSection = (id: string) => {
+    if (id === "our-team") {
+      setView("team");
+      return;
+    }
+
     if (view !== "home") {
       setView("home");
       setTimeout(() => {
@@ -2342,6 +2514,7 @@ export const App: React.FC = () => {
                 {view === "primary" && renderPrimaryPage()}
                 {view === "secondary" && renderSecondaryPage()}
                 {view === "contact" && renderContactPage()}
+                {view === "team" && renderTeamPage()}
                 {view === "product-detail" && renderProductDetailPage()}
               </>
             }
