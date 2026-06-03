@@ -514,7 +514,7 @@ export const App: React.FC = () => {
               >
                 <p className="text-sm font-semibold tracking-[0.28em] [text-shadow:0_1px_12px_rgba(0,0,0,0.55)]">
                   <span className="text-emerald-200">Your Digital Experience </span>
-                  <span className="text-white">Beyond Ambition</span>
+                  <span className="text-blue-500">Beyond Ambition</span>
                 </p>
               </AnimatedOnScroll>
               <AnimatedOnScroll staggerIndex={1}>
@@ -527,7 +527,7 @@ export const App: React.FC = () => {
               </AnimatedOnScroll>
             </div>
             <AnimatedOnScroll staggerIndex={2}>
-              <p className="mx-auto max-w-xl text-base leading-relaxed text-slate-100 [text-shadow:0_1px_14px_rgba(0,0,0,0.5)] md:mx-0 md:text-lg">
+              <p className="mx-auto max-w-xl text-lg leading-relaxed text-slate-100 [text-shadow:0_1px_14px_rgba(0,0,0,0.5)] md:mx-0 md:text-xl">
                 Sherwood Technologies builds innovative software solutions for financial institutions and businesses. Our expertise in fintech platforms, mobile applications, and enterprise systems helps organizations manage investments, optimize treasury operations, and deliver modern digital services.
               </p>
             </AnimatedOnScroll>
@@ -594,7 +594,7 @@ export const App: React.FC = () => {
                 <h3 className="mb-3 text-base font-semibold text-slate-900">
                   {service.name}
                 </h3>
-                <p className="flex-1 text-sm leading-relaxed text-slate-600">
+                <p className="flex-1 text-base leading-relaxed text-slate-600">
                   {service.description}
                 </p>
               </div>
@@ -639,7 +639,7 @@ export const App: React.FC = () => {
                   <h3 className="mb-3 text-base font-semibold text-slate-900">
                     {product.name}
                   </h3>
-                  <p className="text-sm text-slate-600">
+                  <p className="text-base text-slate-600">
                     {product.description}
                   </p>
                 </div>
