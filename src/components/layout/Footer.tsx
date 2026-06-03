@@ -66,7 +66,7 @@ export const Footer: React.FC<{
               />
             </button>
 
-            <p className="max-w-sm text-sm leading-relaxed text-slate-600">
+            <p className="max-w-sm text-base leading-relaxed text-slate-600">
               We build secure, scalable fintech software—treasury platforms,
               investment tools, and modern digital experiences for financial
               institutions.
