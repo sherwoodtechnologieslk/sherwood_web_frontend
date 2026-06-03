@@ -46,6 +46,12 @@ module.exports = {
     historyApiFallback: true,
     port: 5174,
     open: true,
+    proxy: [
+      {
+        context: ["/api"],
+        target: "http://localhost:4000",
+      },
+    ],
   },
   plugins: [
     new HtmlWebpackPlugin({

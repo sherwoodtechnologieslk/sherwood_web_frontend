@@ -23,8 +23,7 @@ import wealthMobileScreenshot1 from "../images/mobile image1.png .png";
 import wealthMobileScreenshot2 from "../images/mobile img 2.png";
 import wealthMobileScreenshot3 from "../images/mobile image 3 new.png";
 import wealthMobileScreenshot4 from "../images/mobile image 4 new.png";
-
-declare const __API_BASE_URL__: string;
+import { apiFetch } from "./lib/api";
 
 const WEALTH_MOBILE_SCREENSHOTS = [
   wealthMobileScreenshot1,
@@ -1009,44 +1008,15 @@ export const App: React.FC = () => {
                             source: "primary-action",
                           });
 
-                          const configuredBaseUrl =
-                            typeof __API_BASE_URL__ === "string"
-                              ? __API_BASE_URL__.trim()
-                              : "";
-
-                          const runningOnLocalhost =
-                            typeof window !== "undefined" &&
-                            (window.location.hostname === "localhost" ||
-                              window.location.hostname === "127.0.0.1");
-
-                          // In production (e.g. Vercel), the backend is typically exposed on the
-                          // same origin via an API route. If we only try localhost, the request
-                          // fails and we show a false validation error even though the API may
-                          // actually exist.
-                          const backendCandidates = configuredBaseUrl
-                            ? [configuredBaseUrl]
-                            : [
-                                ...(runningOnLocalhost ? [] : [""]),
-                                "/api",
-                                "http://localhost:4001",
-                              ];
-
                           let res: Response | null = null;
-                          for (const baseUrl of backendCandidates) {
-                            try {
-                              const attempt = await fetch(
-                                `${baseUrl}/api/project-inquiries`,
-                                {
-                                  method: "POST",
-                                  headers: { "Content-Type": "application/json" },
-                                  body,
-                                },
-                              );
-                              res = attempt;
-                              break;
-                            } catch {
-                              // try next
-                            }
+                          try {
+                            res = await apiFetch("/api/project-inquiries", {
+                              method: "POST",
+                              headers: { "Content-Type": "application/json" },
+                              body,
+                            });
+                          } catch {
+                            res = null;
                           }
 
                           if (!res) {
@@ -1338,7 +1308,7 @@ export const App: React.FC = () => {
 
     setConsultationSubmitting(true);
     try {
-      const res = await fetch("/api/users", {
+      const res = await apiFetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
