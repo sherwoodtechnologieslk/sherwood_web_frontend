@@ -1611,10 +1611,10 @@ export const App: React.FC = () => {
                 <li>
                   <span className="font-semibold text-slate-900">Email:</span>{" "}
                   <a
-                    href="mailto:info@sherwoodtechnologies.lk"
+                    href="mailto:billing@sherwoodtechnologies.lk"
                     className="text-blue-600 underline decoration-blue-600/40 underline-offset-2 hover:text-blue-700"
                   >
-                    info@sherwoodtechnologies.lk
+                    billing@sherwoodtechnologies.lk
                   </a>
                 </li>
                 <li>
