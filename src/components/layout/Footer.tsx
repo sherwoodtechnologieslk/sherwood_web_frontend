@@ -92,9 +92,9 @@ export const Footer: React.FC<{
               <div className="mt-3 flex flex-col gap-1 text-sm">
                 <a
                   className={linkClass}
-                  href="mailto:info@sherwoodtechnologies.lk"
+                  href="mailto:billing@sherwoodtechnologies.lk"
                 >
-                  info@sherwoodtechnologies.lk
+                  billing@sherwoodtechnologies.lk
                 </a>
                 <a className={linkClass} href="tel:+94777393437">
                   +94 77 739 3437

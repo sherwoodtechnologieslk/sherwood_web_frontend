@@ -8,6 +8,7 @@ const sections = [
   { id: "products", label: "Products" },
   ...(showClientsSection ? [{ id: "clients" as const, label: "Clients" }] : []),
   { id: "about", label: "About us" },
+  { id: "our-team", label: "Our team" },
 ];
 
 /** Matches reffer code marketing-navigation.css: top 1.2rem, width 90%, max 1080px, padding ~0.65rem vertical */
